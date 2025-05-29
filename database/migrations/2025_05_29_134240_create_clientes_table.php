@@ -15,15 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('email');
-            $table->string(column: 'telefone');
-            $table->string(column: 'cpf');
-            $table->string(column: 'cep');
-            $table->string(column: 'estado');
-            $table->string(column: 'cidade');
-            $table->string(column: 'endereco');
-            $table->string(column: 'numero');
-            $table->string(column: 'complemento');
-            $table->text(column: 'observacao');
+            $table->string('telefone');
+            $table->string('cpf');
+            $table->string('cep');
+            $table->string('estado');
+            $table->string('cidade');
+            $table->string('endereco');
+            $table->string('numero');
+            $table->string('complemento');
+            $table->text('observacao');
             $table->timestamps();
         });
     }

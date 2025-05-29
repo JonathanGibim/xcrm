@@ -19,7 +19,6 @@ return new class extends Migration
             $table->enum('prioridade', ['baixa', 'media', 'alta']);
             $table->enum('status', ['aberto', 'respondendo', 'fechado']);
             $table->timestamps();
-            
         });
     }
 
