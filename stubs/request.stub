@@ -1,0 +1,28 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class {{ class }} extends FormRequest
+{
+    /**
+     * Determina se o usuário está autorizado a fazer essa requisição.
+     */
+    public function authorize(): bool
+    {
+        return false;
+    }
+
+    /**
+     * Obtém as regras de validação aplicáveis à requisição.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        return [
+            //
+        ];
+    }
+}
