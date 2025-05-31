@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('endereco');
             $table->string('numero');
             $table->string('complemento');
-            $table->text('observacao');
             $table->timestamps();
         });
     }
