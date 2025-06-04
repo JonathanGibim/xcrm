@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->string('email');
-            $table->string('telefone');
-            $table->string('cpf');
-            $table->string('cep');
-            $table->string('estado');
-            $table->string('cidade');
-            $table->string('endereco');
-            $table->string('numero');
-            $table->string('complemento');
+            $table->string('nome', 255);
+            $table->string('email',255)->unique();
+            $table->string('telefone',15);
+            $table->string('cpf', 14)->unique();
+            $table->string('cep', 9);
+            $table->string('estado', 255);
+            $table->string('cidade', 255);
+            $table->string('endereco', 255);
+            $table->string('numero', 10);
+            $table->string('complemento', 255)->nullable();
             $table->timestamps();
         });
     }

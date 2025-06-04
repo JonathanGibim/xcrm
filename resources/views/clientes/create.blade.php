@@ -19,19 +19,19 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label for="nome" class="form-label">Nome Completo</label>
-                            <input type="text" class="form-control" id="nome" name="nome" required>
+                            <input type="text" class="form-control" value="{{ old('nome') }}" id="nome" name="nome" required>
                         </div>
                         <div class="col-md-6">
                             <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required>
+                            <input type="email" class="form-control" value="{{ old('email') }}" id="email" name="email" required>
                         </div>
                         <div class="col-md-6">
                             <label for="telefone" class="form-label">Telefone</label>
-                            <input type="tel" class="form-control" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" pattern="[0-9]{2} [0-9]{5}-[0-9]{4}" title="Formato: (XX) XXXXX-XXXX" required>
+                            <input type="tel" class="form-control" value="{{ old('telefone') }}" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}" title="Formato: (XX) XXXXX-XXXX" required>
                         </div>
                         <div class="col-md-6">
                             <label for="cpf" class="form-label">CPF</label>
-                            <input type="text" class="form-control" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" title="Formato: XXX.XXX.XXX-XX" required>
+                            <input type="text" class="form-control" value="{{ old('cpf') }}" id="cpf" name="cpf" placeholder="XXX.XXX.XXX-XX" pattern="[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}" title="Formato: XXX.XXX.XXX-XX" required>
                         </div>
                     </div>
                 </fieldset>
@@ -42,32 +42,32 @@
                     <div class="row g-3">
                         <div class="col-md-4">
                             <label for="cep" class="form-label">CEP</label>
-                            <input type="text" class="form-control" id="cep" name="cep" placeholder="XXXXX-XXX" pattern="[0-9]{5}-[0-9]{3}" title="Formato: XXXXX-XXX" required>
+                            <input type="text" class="form-control" value="{{ old('cep') }}" id="cep" name="cep" placeholder="XXXXX-XXX" pattern="[0-9]{5}-[0-9]{3}" title="Formato: XXXXX-XXX" required>
                         </div>
                         <div class="col-md-4">
                             <label for="estado" class="form-label">Estado</label>
                             <select class="form-select" id="estado" name="estado" required>
                                 <option value="">Selecione um estado</option>
                                 @foreach($estados as $sigla => $nome)
-                                    <option value="{{ $sigla }}">{{ $nome }}</option>
+                                    <option value="{{ $sigla }}" {{ (old('estado') == $sigla) ? 'selected' : '' }}>{{ $nome }}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-4">
                             <label for="cidade" class="form-label">Cidade</label>
-                            <input type="text" class="form-control" id="cidade" name="cidade" required>
+                            <input type="text" class="form-control" value="{{ old('cidade') }}" id="cidade" name="cidade" required>
                         </div>
                         <div class="col-md-8">
                             <label for="endereco" class="form-label">Endereço</label>
-                            <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Rua, Avenida, etc." required>
+                            <input type="text" class="form-control" value="{{ old('endereco') }}" id="endereco" name="endereco" placeholder="Rua, Avenida, etc." required>
                         </div>
                         <div class="col-md-4">
                             <label for="numero" class="form-label">Número</label>
-                            <input type="text" class="form-control" id="numero" name="numero" required>
+                            <input type="text" class="form-control" value="{{ old('numero') }}" id="numero" name="numero" required>
                         </div>
                         <div class="col-md-12">
                             <label for="complemento" class="form-label">Complemento (Opcional)</label>
-                            <input type="text" class="form-control" id="complemento" name="complemento">
+                            <input type="text" class="form-control" value="{{ old('complemento') }}" id="complemento" name="complemento">
                         </div>
                     </div>
                 </fieldset>

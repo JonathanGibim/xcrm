@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use Illuminate\Http\Request;
+use App\Rules\CpfValido;
 
 class ClienteController extends Controller
 {
@@ -61,11 +62,23 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
 
-            $requestData = $request->all();
+            //$requestData = $request->all();
+            $request->validate([
+                'nome' => 'required|string|min:3|max:255',
+                'email' => 'required|email|unique:clientes,email',
+                'telefone' => 'required|string|max:20',
+                'cpf' => ['required','string','max:14','unique:clientes,cpf', new CpfValido],
+                'cep' => 'required|string|max:9',
+                'estado' => 'required|string|max:2',
+                'cidade' => 'required|string|max:255',
+                'endereco' => 'required|string|max:255',
+                'numero' => 'required|string|max:10',
+                'complemento' => 'nullable|string|max:255',
+            ]);
 
 		try {
 
-			Cliente::create($requestData);
+			Cliente::create($request->all());
 
 		} catch (\PDOException $e) {
 
@@ -78,7 +91,7 @@ class ClienteController extends Controller
 
 		}        
 
-        return redirect('clientes')->with('success', 'Adicionado com sucesso!');
+        //return to_route('clientes.create')->with('success', 'Adicionado com sucesso!');
     }
 
     /**

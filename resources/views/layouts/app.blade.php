@@ -69,6 +69,20 @@
 
         {{-- Conteúdo principal --}}
         <main class="py-4">
+            
+            @if ($errors->any())
+            <div class="container mt-4">
+                <div class="alert alert-danger">
+                    <h5 class="alert-heading">Opa! Algo deu errado.</h5>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            @endif
+            
             @yield('content')
         </main>
 
