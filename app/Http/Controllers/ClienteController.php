@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreClienteRequest;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
-use App\Rules\CpfValido;
+use App\Helpers\AppHelper;
 
 class ClienteController extends Controller
 {
@@ -23,35 +24,7 @@ class ClienteController extends Controller
     public function create()
     {
 
-        $estados = [
-            'AC' => 'Acre',
-            'AL' => 'Alagoas',
-            'AP' => 'Amapá',
-            'AM' => 'Amazonas',
-            'BA' => 'Bahia',
-            'CE' => 'Ceará',
-            'DF' => 'Distrito Federal',
-            'ES' => 'Espírito Santo',
-            'GO' => 'Goiás',
-            'MA' => 'Maranhão',
-            'MT' => 'Mato Grosso',
-            'MS' => 'Mato Grosso do Sul',
-            'MG' => 'Minas Gerais',
-            'PA' => 'Pará',
-            'PB' => 'Paraíba',
-            'PR' => 'Paraná',
-            'PE' => 'Pernambuco',
-            'PI' => 'Piauí',
-            'RJ' => 'Rio de Janeiro',
-            'RN' => 'Rio Grande do Norte',
-            'RS' => 'Rio Grande do Sul',
-            'RO' => 'Rondônia',
-            'RR' => 'Roraima',
-            'SC' => 'Santa Catarina',
-            'SP' => 'São Paulo',
-            'SE' => 'Sergipe',
-            'TO' => 'Tocantins',
-        ];
+        $estados = AppHelper::estados();
 
         return view('clientes.create', compact('estados'));
     }
@@ -59,26 +32,14 @@ class ClienteController extends Controller
     /**
      * Armazena um novo recurso.
      */
-    public function store(Request $request)
+    public function store(StoreClienteRequest $request)
     {
 
-            //$requestData = $request->all();
-            $request->validate([
-                'nome' => 'required|string|min:3|max:255',
-                'email' => 'required|email|unique:clientes,email',
-                'telefone' => 'required|string|max:20',
-                'cpf' => ['required','string','max:14','unique:clientes,cpf', new CpfValido],
-                'cep' => 'required|string|max:9',
-                'estado' => 'required|string|max:2',
-                'cidade' => 'required|string|max:255',
-                'endereco' => 'required|string|max:255',
-                'numero' => 'required|string|max:10',
-                'complemento' => 'nullable|string|max:255',
-            ]);
+            $requestData = $request->validated();
 
 		try {
 
-			Cliente::create($request->all());
+			Cliente::create($requestData);
 
 		} catch (\PDOException $e) {
 
