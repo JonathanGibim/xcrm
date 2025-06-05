@@ -36,6 +36,7 @@ class ClienteController extends Controller
     {
 
             $requestData = $request->validated();
+            //$requestData['senha'] = bcrypt($requestData['senha']);
 
 		try {
 

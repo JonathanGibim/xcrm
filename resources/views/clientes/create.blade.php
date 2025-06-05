@@ -26,6 +26,14 @@
                             <input type="email" class="form-control" value="{{ old('email') }}" id="email" name="email" required>
                         </div>
                         <div class="col-md-6">
+                            <label for="senha" class="form-label">Senha</label>
+                            <input type="password" class="form-control" value="{{ old('senha') }}" id="senha" name="senha" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="senha_confirmation" class="form-label">Confirmação de Senha</label>
+                            <input type="password" class="form-control" value="{{ old('senha_confirmation') }}" id="senha_confirmation" name="senha_confirmation" required>
+                        </div>
+                        <div class="col-md-6">
                             <label for="telefone" class="form-label">Telefone</label>
                             <input type="tel" class="form-control" value="{{ old('telefone') }}" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX" pattern="\([0-9]{2}\) [0-9]{4,5}-[0-9]{4}" title="Formato: (XX) XXXXX-XXXX" required>
                         </div>
