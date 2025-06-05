@@ -6,6 +6,7 @@ use App\Http\Requests\StoreClienteRequest;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Helpers\AppHelper;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class ClienteController extends Controller
@@ -41,7 +42,7 @@ class ClienteController extends Controller
 
 		try {
 
-			Cliente::create($requestData);
+			$cliente = Cliente::create($requestData);
 
 		} catch (\PDOException $e) {
 
@@ -54,38 +55,12 @@ class ClienteController extends Controller
 
 		}        
 
-        //return to_route('clientes.create')->with('success', 'Adicionado com sucesso!');
+    // Faz login automático
+    Auth::guard('cliente')->login($cliente);
+
+    // Redireciona para o painel do cliente
+    return to_route('painel.dashboard')->with('success', 'Cadastro realizado com sucesso!');
+    
     }
 
-    /**
-     * Exibe o recurso especificado.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Exibe o formulário para editar o recurso especificado.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Atualiza o recurso especificado.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove o recurso especificado.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }
