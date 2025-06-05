@@ -25,7 +25,7 @@ class StoreClienteRequest extends FormRequest
     return [
         'nome' => 'required|string|min:3|max:255',
         'email' => 'required|email|unique:clientes,email',
-        'senha' => 'required|string|min:6|confirmed',
+        'password' => 'required|string|min:6|confirmed',
         'telefone' => 'required|string|max:20',
         'cpf' => ['required','string','max:14','unique:clientes,cpf', new CpfValido],
         'cep' => 'required|string|max:9',

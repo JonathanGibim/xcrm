@@ -6,6 +6,7 @@ use App\Http\Requests\StoreClienteRequest;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Helpers\AppHelper;
+use Illuminate\Support\Facades\Hash;
 
 class ClienteController extends Controller
 {
@@ -36,7 +37,7 @@ class ClienteController extends Controller
     {
 
             $requestData = $request->validated();
-            //$requestData['senha'] = bcrypt($requestData['senha']);
+            $requestData['password'] = Hash::make($requestData['password']);
 
 		try {
 

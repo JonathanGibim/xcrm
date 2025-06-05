@@ -26,12 +26,12 @@
                             <input type="email" class="form-control" value="{{ old('email') }}" id="email" name="email" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="senha" class="form-label">Senha</label>
-                            <input type="password" class="form-control" value="{{ old('senha') }}" id="senha" name="senha" required>
+                            <label for="password" class="form-label">Senha</label>
+                            <input type="password" class="form-control" value="{{ old('password') }}" id="password" name="password" required>
                         </div>
                         <div class="col-md-6">
-                            <label for="senha_confirmation" class="form-label">Confirmação de Senha</label>
-                            <input type="password" class="form-control" value="{{ old('senha_confirmation') }}" id="senha_confirmation" name="senha_confirmation" required>
+                            <label for="password_confirmation" class="form-label">Confirmação de Senha</label>
+                            <input type="password" class="form-control" value="{{ old('password_confirmation') }}" id="password_confirmation" name="password_confirmation" required>
                         </div>
                         <div class="col-md-6">
                             <label for="telefone" class="form-label">Telefone</label>

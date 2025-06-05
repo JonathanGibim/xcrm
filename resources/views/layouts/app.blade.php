@@ -25,10 +25,24 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
-                        {{-- Exemplo de link --}}
+                        @guest
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('clientes.create') }}">Cadastrar Cliente</a>
+                            <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('documentacao') }}">Documentação da API</a>
+                        </li>
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('painel.dashboard') }}">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('painel.perfil') }}">Meu Perfil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('painel.suporte') }}">Suporte</a>
+                        </li>
+                        @endguest
                         {{-- Outros links --}}
                     </ul>
 
@@ -39,23 +53,22 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-
-                            @if (Route::has('register'))
+                            @if (Route::has('clientes.create'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('clientes.create') }}">Cadastre-se</a>
                                 </li>
                             @endif
                         @else
                             <li class="nav-item dropdown">
+
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{ Auth::user()->nome }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
