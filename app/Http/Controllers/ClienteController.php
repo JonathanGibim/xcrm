@@ -11,14 +11,6 @@ use Illuminate\Support\Facades\Hash;
 
 class ClienteController extends Controller
 {
-    /**
-     * Exibe uma lista do recurso.
-     */
-    public function index()
-    {
-        $clientes = Cliente::all();
-        return view('clientes.index')->with('clientes', $clientes);
-    }
 
     /**
      * Exibe o formulário para criar um novo recurso.

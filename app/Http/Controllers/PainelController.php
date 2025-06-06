@@ -14,8 +14,4 @@ class PainelController extends Controller
         return view('painel.perfil');
     }
 
-    public function suporte()
-    {
-        return view('painel.suporte');
-    }
 }

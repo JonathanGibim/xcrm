@@ -8,5 +8,4 @@
     <h1>Bem vindo ao Painel do cliente da XCRM </h1>
 </div>
 
-
 @endsection

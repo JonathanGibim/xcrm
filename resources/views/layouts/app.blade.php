@@ -39,9 +39,15 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('painel.perfil') }}">Meu Perfil</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('painel.suporte') }}">Suporte</a>
-                        </li>
+
+                        <li class="nav-item dropdown">
+                                <a id="navbarDropdownSuporte" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Suporte</a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownSuporte">
+                                    <a class="nav-link" href="{{ route('painel.chamados.create') }}">Abrir Chamado</a>
+                                    <a class="nav-link" href="{{ route('painel.chamados.index') }}">Meus Chamados</a>
+                                </div>
+                            </li>
+
                         @endguest
                         {{-- Outros links --}}
                     </ul>

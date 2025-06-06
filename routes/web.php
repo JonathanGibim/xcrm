@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChamadoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\PainelController;
 use App\Http\Controllers\ClienteAuthController;
@@ -33,6 +34,6 @@ Route::middleware('auth:cliente')->prefix('painel')->name('painel.')->group(func
     Route::get('/perfil', [ClientePainelController::class, 'edit'])->name('perfil');
     Route::post('/perfil', [ClientePainelController::class, 'update'])->name('perfil.update');
 
-    Route::get('/suporte', [PainelController::class, 'suporte'])->name('suporte');
+    Route::resource('/chamados', ChamadoController::class);
     
 });

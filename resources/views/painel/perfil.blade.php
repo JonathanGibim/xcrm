@@ -1,8 +1,8 @@
-@extends('layouts.app')
+@extends('layouts.app') {{-- layout principal chamado app.blade.php --}}
 
-@section('title', 'Meu Perfil')
+@section('title', 'Meu Perfil') {{-- Opcional, para o título da página --}}
 
-@section('content')
+@section('content') {{-- Onde o conteúdo será inserido no layout --}}
 
 <div class="container mt-4">
     <div class="card shadow-sm">
