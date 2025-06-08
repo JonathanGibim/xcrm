@@ -58,9 +58,9 @@
 
                     <ul class="navbar-nav ms-auto">
                         @guest('cliente')
-                            @if (Route::has('login'))
+                            @if (Route::has('painel.login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('painel.login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
                             @if (Route::has('clientes.create'))
@@ -76,10 +76,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <a class="dropdown-item" href="{{ route('painel.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    <form id="logout-form" action="{{ route('painel.logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
                                 </div>

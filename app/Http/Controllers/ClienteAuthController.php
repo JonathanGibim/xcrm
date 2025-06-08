@@ -9,7 +9,7 @@ class ClienteAuthController extends Controller
 {
     public function showLoginForm()
     {
-        return view('login');
+        return view('painel.login');
     }
 
     public function login(Request $request)
@@ -28,6 +28,6 @@ class ClienteAuthController extends Controller
     public function logout()
     {
         Auth::guard('cliente')->logout();
-        return redirect()->route('login');
+        return redirect()->route('painel.login');
     }
 }
