@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminChamadoController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,8 +12,8 @@ use App\Http\Controllers\ClienteAuthController;
 use App\Http\Controllers\ClientePainelController;
 
 // Admin
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 // Home
 Route::get('/', function () {
@@ -60,13 +62,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('login', [AuthController::class, 'login'])->name('login.submit');
 
     // Logout
-    Route::post('/logout', [ClienteAuthController::class, 'logout'])->name('logout');
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
     // Grupo de rotas protegidas do admin
     Route::middleware('auth')->group(function () {
 
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+        Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+
+        Route::get('/perfil', [UserController::class, 'edit'])->name('perfil');
+        Route::post('/perfil', [UserController::class, 'update'])->name('perfil.update');
+
+        Route::resource('/chamados', AdminChamadoController::class);
 
     });
 
