@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\AppHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminUpdateClienteRequest;
 use App\Http\Requests\StoreClienteRequest;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
@@ -61,8 +62,11 @@ class AdminClienteController extends Controller
         return view('admin.clientes.edit', compact(['cliente', 'estados']));
     }
 
-    public function update(Request $request, Cliente $cliente)
+    public function update(AdminUpdateClienteRequest $request, Cliente $cliente)
     {
+
+        $request->validated();
+        
         $cliente->fill($request->except('password', 'password_confirmation'));
 
         if ($request->filled('password')) {
