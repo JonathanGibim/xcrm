@@ -1,80 +1,79 @@
 <?php
 
-use App\Http\Controllers\AdminChamadoController;
-use App\Http\Controllers\AdminClienteController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClienteController;
 
 // Painel
-use App\Http\Controllers\ChamadoController;
 use App\Http\Controllers\PainelController;
-use App\Http\Controllers\ClienteAuthController;
-use App\Http\Controllers\ClientePainelController;
+use App\Http\Controllers\PainelAuthController;
+use App\Http\Controllers\PainelClienteController;
+use App\Http\Controllers\PainelChamadoController;
 
 // Admin
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AdminClienteController;
+use App\Http\Controllers\AdminChamadoController;
 
 // Home
 Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-// Criar cliente
-Route::resource('/clientes', ClienteController::class)->only('create', 'store');
-
 // Documentação
 Route::get('/documentacao', function () {
     return view('documentacao');
 })->name('documentacao');
 
+// Criar cliente
+Route::resource('/clientes', ClienteController::class)->only('create', 'store');
 
-// Grupo de rotas do painel
+// Grupo de rotas do painel do cliente
 Route::prefix('painel')->name('painel.')->group(function () {
 
     // Login
-    Route::get('login', [ClienteAuthController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [ClienteAuthController::class, 'login'])->name('login.submit');
+    Route::get('login', [PainelAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [PainelAuthController::class, 'login'])->name('login.submit');
 
     // Logout
-    Route::post('logout', [ClienteAuthController::class, 'logout'])->name('logout');
+    Route::post('logout', [PainelAuthController::class, 'logout'])->name('logout');
 
-    // Grupo de rotas protegidas do painel
+    // Grupo de rotas protegidas do painel do cliente
     Route::middleware('auth:cliente')->group(function () {
         
         Route::get('/', [PainelController::class, 'dashboard'])->name('dashboard');
 
-        Route::get('/perfil', [ClientePainelController::class, 'edit'])->name('perfil');
-        Route::post('/perfil', [ClientePainelController::class, 'update'])->name('perfil.update');
+        Route::get('/perfil', [PainelClienteController::class, 'edit'])->name('perfil');
+        Route::post('/perfil', [PainelClienteController::class, 'update'])->name('perfil.update');
 
-        Route::resource('/chamados', ChamadoController::class);
+        Route::resource('/chamados', PainelChamadoController::class);
 
     });
 
 });
 
 
-// Grupo de rotas do admin
+// Grupo de rotas do painel administrativo
 Route::prefix('admin')->name('admin.')->group(function () {
     
     // Login
-    Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
-    Route::post('login', [AuthController::class, 'login'])->name('login.submit');
+    Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [AdminAuthController::class, 'login'])->name('login.submit');
 
     // Logout
-    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
 
-    // Grupo de rotas protegidas do admin
+    // Grupo de rotas protegidas do painel administrativo
     Route::middleware('auth')->group(function () {
 
         Route::get('/', [AdminController::class, 'index'])->name('dashboard');
 
-        Route::get('/perfil', [UserController::class, 'edit'])->name('perfil');
-        Route::post('/perfil', [UserController::class, 'update'])->name('perfil.update');
+        Route::get('/perfil', [AdminUserController::class, 'edit'])->name('perfil');
+        Route::post('/perfil', [AdminUserController::class, 'update'])->name('perfil.update');
 
         Route::resource('/chamados', AdminChamadoController::class)->only('index', 'create', 'store', 'show');
-
+        
         Route::post('/chamados/{chamado}/responder', [AdminChamadoController::class, 'responder'])->name('chamados.responder');
         Route::post('/chamados/{chamado}/fechar', [AdminChamadoController::class, 'fechar'])->name('chamados.fechar');
 

@@ -6,7 +6,7 @@ use App\Models\Chamado;
 use App\Models\ChamadoResposta;
 use Illuminate\Http\Request;
 
-class ChamadoController extends Controller
+class PainelChamadoController extends Controller
 {
     /**
      * Exibe uma lista do recurso.

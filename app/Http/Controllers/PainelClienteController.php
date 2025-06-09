@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class ClientePainelController extends Controller
+class PainelClienteController extends Controller
 {
     public function edit()
     {
