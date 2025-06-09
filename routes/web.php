@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminChamadoController;
+use App\Http\Controllers\AdminClienteController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClienteController;
 use Illuminate\Support\Facades\Route;
@@ -77,6 +78,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/chamados/{chamado}/responder', [AdminChamadoController::class, 'responder'])->name('chamados.responder');
         Route::post('/chamados/{chamado}/fechar', [AdminChamadoController::class, 'fechar'])->name('chamados.fechar');
 
+        Route::resource('/clientes', AdminClienteController::class);
 
     });
 

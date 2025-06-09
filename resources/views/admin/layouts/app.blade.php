@@ -45,13 +45,20 @@
                         </li>
 
                         <li class="nav-item dropdown">
-                                <a id="navbarDropdownSuporte" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Suporte</a>
-                                <div class="dropdown-menu dropdown-menu-end navbar-dark bg-dark" aria-labelledby="navbarDropdownSuporte">
-                                    <a class="nav-link" href="{{ route('admin.chamados.create') }}">Abrir Chamado</a>
-                                    <a class="nav-link" href="{{ route('admin.chamados.index') }}">Todos os chamados</a>
-                                </div>
-                            </li>
+                            <a id="navbarDropdownSuporte" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Suporte</a>
+                            <div class="dropdown-menu dropdown-menu-end navbar-dark bg-dark" aria-labelledby="navbarDropdownSuporte">
+                                <a class="nav-link" href="{{ route('admin.chamados.create') }}">Abrir Chamado</a>
+                                <a class="nav-link" href="{{ route('admin.chamados.index') }}">Todos os chamados</a>
+                            </div>
+                        </li>
 
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdownSuporte" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Clientes</a>
+                            <div class="dropdown-menu dropdown-menu-end navbar-dark bg-dark" aria-labelledby="navbarDropdownSuporte">
+                                <a class="nav-link" href="{{ route('admin.clientes.create') }}">Novo Cliente</a>
+                                <a class="nav-link" href="{{ route('admin.clientes.index') }}">Todos os clientes</a>
+                            </div>
+                        </li>
                         @endguest
 
                     </ul>
