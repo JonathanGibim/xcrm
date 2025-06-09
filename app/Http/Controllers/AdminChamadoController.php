@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chamado;
+use App\Models\ChamadoResposta;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 
@@ -55,6 +56,30 @@ class AdminChamadoController extends Controller
     {
         $chamado = Chamado::findOrFail($id);
         return view('admin.chamados.show', compact('chamado'));
+    }
+
+    public function responder(Request $request, Chamado $chamado)
+    {
+        $request->validate([
+            'mensagem' => 'required|string',
+        ]);
+
+        ChamadoResposta::create([
+            'chamado_id' => $chamado->id,
+            'mensagem' => $request->mensagem,
+            'autor' => 'admin',
+        ]);
+
+        // opcional: atualizar status do chamado
+        $chamado->update(['status' => 'respondido']);
+
+        return back()->with('success', 'Resposta enviada com sucesso!');
+    }
+
+    public function fechar(Chamado $chamado)
+    {
+        $chamado->update(['status' => 'fechado']);
+        return redirect()->route(route: 'admin.chamados.index')->with('success', 'Chamado fechado com sucesso.');
     }
 
 }

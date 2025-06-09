@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chamado;
+use App\Models\ChamadoResposta;
 use Illuminate\Http\Request;
 
 class ChamadoController extends Controller
@@ -61,27 +62,22 @@ class ChamadoController extends Controller
         return view('painel.chamados.show', compact('chamado'));
     }
 
-    /**
-     * Exibe o formulário para editar o recurso especificado.
-     */
-    public function edit(string $id)
+        public function responder(Request $request, Chamado $chamado)
     {
-        //
+        $request->validate([
+            'mensagem' => 'required|string',
+        ]);
+
+        ChamadoResposta::create([
+            'chamado_id' => $chamado->id,
+            'mensagem' => $request->mensagem,
+            'autor' => 'cliente',
+        ]);
+
+        // opcional: atualizar status do chamado
+        $chamado->update(['status' => 'aberto']);
+
+        return back()->with('success', 'Resposta enviada com sucesso!');
     }
 
-    /**
-     * Atualiza o recurso especificado.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove o recurso especificado.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
 }

@@ -72,7 +72,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/perfil', [UserController::class, 'edit'])->name('perfil');
         Route::post('/perfil', [UserController::class, 'update'])->name('perfil.update');
 
-        Route::resource('/chamados', AdminChamadoController::class);
+        Route::resource('/chamados', AdminChamadoController::class)->only('index', 'create', 'store', 'show');
+
+        Route::post('/chamados/{chamado}/responder', [AdminChamadoController::class, 'responder'])->name('chamados.responder');
+        Route::post('/chamados/{chamado}/fechar', [AdminChamadoController::class, 'fechar'])->name('chamados.fechar');
+
 
     });
 

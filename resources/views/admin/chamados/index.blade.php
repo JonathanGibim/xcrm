@@ -38,15 +38,15 @@
                                         <span class="badge 
                                             @if($chamado->prioridade == 'alta') bg-danger
                                             @elseif($chamado->prioridade == 'media') bg-warning text-dark
-                                            @else bg-success @endif">
+                                            @else bg-info @endif">
                                             {{ ucfirst($chamado->prioridade) }}
                                         </span>
                                     </td>
                                     <td>
                                         <span class="badge 
                                             @if($chamado->status == 'aberto') bg-primary
-                                            @elseif($chamado->status == 'respondendo') bg-warning text-dark
-                                            @else bg-secondary @endif">
+                                            @elseif($chamado->status == 'respondido') bg-warning text-dark
+                                            @else bg-success @endif">
                                             {{ ucfirst($chamado->status) }}
                                         </span>
                                     </td>

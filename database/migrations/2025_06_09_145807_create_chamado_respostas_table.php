@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chamados', function (Blueprint $table) {
+        Schema::create('chamado_respostas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('clientes_id')->constrained()->onDelete('cascade');
-            $table->text('assunto');
-            $table->longText(column: 'descricao');
-            $table->enum('prioridade', ['baixa', 'media', 'alta']);
-            $table->enum('status', ['aberto', 'respondido', 'fechado']);
+            $table->foreignId('chamado_id')->constrained()->onDelete('cascade');
+            $table->text('mensagem');
+            $table->enum('autor', ['admin', 'cliente']); // Identifica quem respondeu
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('chamados');
+        Schema::dropIfExists('chamado_respostas');
     }
 };
