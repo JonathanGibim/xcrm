@@ -53,7 +53,6 @@
                                     <td>{{ $chamado->created_at->format('d/m/Y H:i') }}</td>
                                     <td class="text-end">
                                         <a href="{{ route('admin.chamados.show', $chamado->id) }}" class="btn btn-sm btn-outline-primary">Ver</a>
-                                        {{-- <a href="{{ route('chamados.edit', $chamado->id) }}" class="btn btn-sm btn-outline-secondary">Editar</a> --}}
                                     </td>
                                 </tr>
                             @endforeach

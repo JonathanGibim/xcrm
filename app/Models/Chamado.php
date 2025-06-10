@@ -13,4 +13,8 @@ class Chamado extends Model
         return $this->hasMany(ChamadoResposta::class);
     }
 
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class, 'clientes_id');
+    }
 }
