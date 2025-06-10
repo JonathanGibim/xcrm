@@ -27,6 +27,27 @@
                 <dd class="col-sm-9">{{ $chamado->created_at->format('d/m/Y H:i') }}</dd>
             </dl>
 
+            @if(count($chamado->respostas) > 0)
+                <h3>Respostas</h3>
+                @foreach($chamado->respostas as $resposta)
+                    <div class="mt-2">
+                        <small>{{ $resposta->created_at->format('d/m/Y H:i') }}</small> - <strong>{{ $resposta->autor === 'admin' ? 'Suporte' : 'Cliente' }}</strong>: 
+                        <br>
+                        {{ $resposta->mensagem }}
+                    </div>
+                @endforeach
+            @endif
+
+            <hr>
+
+            @if($chamado->status != 'fechado')
+                <form action="{{ route('painel.chamados.responder', $chamado) }}" method="POST">
+                    @csrf
+                    <textarea name="mensagem" class="form-control" required></textarea>
+                    <button type="submit" class="btn btn-primary mt-2">Responder</button>
+                </form>
+            @endif
+
             <div class="d-flex justify-content-end">
                 <a href="{{ route('painel.chamados.index') }}" class="btn btn-secondary">Voltar</a>
             </div>

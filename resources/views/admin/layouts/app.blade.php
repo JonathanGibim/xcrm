@@ -16,7 +16,7 @@
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ route('admin.dashboard') }}">
+                <a class="navbar-brand" href="{{ route('home') }}">
                     {{ config('app.name', 'XCRM App') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -26,22 +26,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto">
                         
-                        @guest
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('home') }}">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('documentacao') }}">Documentação da API</a>
-                        </li>
-
-                        @else
+                        @auth
                         
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.perfil') }}">Meu Perfil</a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdownSuporte" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Clientes</a>
+                            <div class="dropdown-menu dropdown-menu-end navbar-dark bg-dark" aria-labelledby="navbarDropdownSuporte">
+                                <a class="nav-link" href="{{ route('admin.clientes.create') }}">Novo Cliente</a>
+                                <a class="nav-link" href="{{ route('admin.clientes.index') }}">Todos os clientes</a>
+                            </div>
                         </li>
 
                         <li class="nav-item dropdown">
@@ -52,20 +51,16 @@
                             </div>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdownSuporte" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>Clientes</a>
-                            <div class="dropdown-menu dropdown-menu-end navbar-dark bg-dark" aria-labelledby="navbarDropdownSuporte">
-                                <a class="nav-link" href="{{ route('admin.clientes.create') }}">Novo Cliente</a>
-                                <a class="nav-link" href="{{ route('admin.clientes.index') }}">Todos os clientes</a>
-                            </div>
-                        </li>
-                        @endguest
+                        @endauth
 
                     </ul>
 
                     <ul class="navbar-nav ms-auto">
                         @guest
                             @if (Route::has('admin.login'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('home') }}">Voltar ao site</a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('admin.login') }}">{{ __('Login') }}</a>
                                 </li>

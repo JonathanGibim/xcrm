@@ -16,6 +16,7 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminClienteController;
 use App\Http\Controllers\AdminChamadoController;
 
+
 // Home
 Route::get('/', function () {
     return view('welcome');
@@ -26,11 +27,17 @@ Route::get('/documentacao', function () {
     return view('documentacao');
 })->name('documentacao');
 
+
 // Criar cliente
 Route::resource('/clientes', ClienteController::class)->only('create', 'store');
 
 // Grupo de rotas do painel do cliente
 Route::prefix('painel')->name('painel.')->group(function () {
+
+    // Home
+    Route::get('/', function () {
+        return redirect('painel/login');
+    });
 
     // Login
     Route::get('login', [PainelAuthController::class, 'showLoginForm'])->name('login');
@@ -42,12 +49,13 @@ Route::prefix('painel')->name('painel.')->group(function () {
     // Grupo de rotas protegidas do painel do cliente
     Route::middleware('auth:cliente')->group(function () {
         
-        Route::get('/', [PainelController::class, 'dashboard'])->name('dashboard');
+        Route::get('/dashboard', [PainelController::class, 'dashboard'])->name('dashboard');
 
         Route::get('/perfil', [PainelClienteController::class, 'edit'])->name('perfil');
         Route::post('/perfil', [PainelClienteController::class, 'update'])->name('perfil.update');
 
         Route::resource('/chamados', PainelChamadoController::class);
+        Route::post('/chamados/{chamado}/responder', [PainelChamadoController::class, 'responder'])->name('chamados.responder');
 
     });
 
@@ -57,6 +65,11 @@ Route::prefix('painel')->name('painel.')->group(function () {
 // Grupo de rotas do painel administrativo
 Route::prefix('admin')->name('admin.')->group(function () {
     
+    // Home
+    Route::get('/', function () {
+        return redirect('admin/login');
+    });
+
     // Login
     Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
     Route::post('login', [AdminAuthController::class, 'login'])->name('login.submit');
@@ -67,7 +80,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     // Grupo de rotas protegidas do painel administrativo
     Route::middleware('auth')->group(function () {
 
-        Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
         Route::get('/perfil', [AdminUserController::class, 'edit'])->name('perfil');
         Route::post('/perfil', [AdminUserController::class, 'update'])->name('perfil.update');
