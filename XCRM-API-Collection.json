@@ -1,0 +1,216 @@
+{
+  "info": {
+    "name": "XCRM API",
+    "_postman_id": "xcrm-api-collection-id",
+    "description": "Cole\u00e7\u00e3o de testes da API XCRM (clientes, chamados e respostas)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Clientes",
+      "item": [
+        {
+          "name": "Listar Clientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/clientes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "clientes"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Criar Cliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"nome\": \"Jo\u00e3o Silva\",\n    \"email\": \"joao@email.com\",\n    \"password\": \"123456\",\n    \"telefone\": \"11999999999\",\n    \"cpf\": \"123.456.789-00\",\n    \"cep\": \"01234-567\",\n    \"estado\": \"SP\",\n    \"cidade\": \"S\u00e3o Paulo\",\n    \"endereco\": \"Rua Exemplo\",\n    \"numero\": \"100\",\n    \"complemento\": \"Apto 2\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/clientes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "clientes"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mostrar Cliente",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/clientes/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "clientes",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Atualizar Cliente",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"telefone\": \"11888888888\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/clientes/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "clientes",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Deletar Cliente",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/clientes/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "clientes",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Chamados",
+      "item": [
+        {
+          "name": "Listar Chamados",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/chamados",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "chamados"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Criar Chamado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"clientes_id\": 1,\n    \"assunto\": \"Problema com acesso\",\n    \"descricao\": \"N\u00e3o consigo acessar o sistema.\",\n    \"prioridade\": \"alta\",\n    \"status\": \"aberto\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/chamados",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "chamados"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Respostas",
+      "item": [
+        {
+          "name": "Criar Resposta",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"chamado_id\": 1,\n    \"mensagem\": \"Estamos analisando o seu chamado.\",\n    \"autor\": \"admin\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8000/api/respostas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "respostas"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
