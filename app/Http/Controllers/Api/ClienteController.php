@@ -7,14 +7,58 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use OpenApi\Annotations as OA;
 
 class ClienteController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/clientes",
+     *     summary="Listar todos os clientes",
+     *     tags={"Clientes"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de clientes retornada com sucesso"
+     *     )
+     * )
+     */
     public function index()
     {
         return response()->json(Cliente::all());
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/clientes",
+     *     summary="Criar novo cliente",
+     *     tags={"Clientes"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"nome", "email", "password", "telefone", "cpf", "cep", "estado", "cidade", "endereco", "numero"},
+     *             @OA\Property(property="nome", type="string"),
+     *             @OA\Property(property="email", type="string", format="email"),
+     *             @OA\Property(property="password", type="string"),
+     *             @OA\Property(property="telefone", type="string"),
+     *             @OA\Property(property="cpf", type="string"),
+     *             @OA\Property(property="cep", type="string"),
+     *             @OA\Property(property="estado", type="string"),
+     *             @OA\Property(property="cidade", type="string"),
+     *             @OA\Property(property="endereco", type="string"),
+     *             @OA\Property(property="numero", type="string"),
+     *             @OA\Property(property="complemento", type="string", nullable=true)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Cliente criado com sucesso"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Erro de validação"
+     *     )
+     * )
+     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -50,6 +94,28 @@ class ClienteController extends Controller
         ], 201);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/clientes/{id}",
+     *     summary="Exibir um cliente",
+     *     tags={"Clientes"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID do cliente",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Cliente encontrado"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Cliente não encontrado"
+     *     )
+     * )
+     */
     public function show($id)
     {
         $cliente = Cliente::find($id);
@@ -61,6 +127,48 @@ class ClienteController extends Controller
         return response()->json($cliente);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/clientes/{id}",
+     *     summary="Atualizar um cliente",
+     *     tags={"Clientes"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID do cliente",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="nome", type="string"),
+     *             @OA\Property(property="email", type="string", format="email"),
+     *             @OA\Property(property="password", type="string"),
+     *             @OA\Property(property="telefone", type="string"),
+     *             @OA\Property(property="cpf", type="string"),
+     *             @OA\Property(property="cep", type="string"),
+     *             @OA\Property(property="estado", type="string"),
+     *             @OA\Property(property="cidade", type="string"),
+     *             @OA\Property(property="endereco", type="string"),
+     *             @OA\Property(property="numero", type="string"),
+     *             @OA\Property(property="complemento", type="string", nullable=true)
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Cliente atualizado com sucesso"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Cliente não encontrado"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Erro de validação"
+     *     )
+     * )
+     */
     public function update(Request $request, $id)
     {
         $cliente = Cliente::find($id);
@@ -107,6 +215,28 @@ class ClienteController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/clientes/{id}",
+     *     summary="Remover um cliente",
+     *     tags={"Clientes"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID do cliente",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Cliente removido com sucesso"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Cliente não encontrado"
+     *     )
+     * )
+     */
     public function destroy($id)
     {
         $cliente = Cliente::find($id);

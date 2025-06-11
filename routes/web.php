@@ -24,7 +24,7 @@ Route::get('/', function () {
 
 // Documentação
 Route::get('/documentacao', function () {
-    return view('documentacao');
+    return redirect('api/documentation');
 })->name('documentacao');
 
 

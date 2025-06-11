@@ -6,14 +6,50 @@ use App\Models\ChamadoResposta;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use OpenApi\Annotations as OA;
 
 class ChamadoRespostaController extends Controller
 {
+    /**
+     * @OA\Get(
+     *     path="/api/chamado-respostas",
+     *     summary="Listar todas as respostas dos chamados",
+     *     tags={"Chamado Respostas"},
+     *     @OA\Response(
+     *         response=200,
+     *         description="Lista de respostas retornada com sucesso"
+     *     )
+     * )
+     */
     public function index()
     {
         return response()->json(ChamadoResposta::with('chamado')->get());
     }
 
+    /**
+     * @OA\Post(
+     *     path="/api/chamado-respostas",
+     *     summary="Registrar nova resposta ao chamado",
+     *     tags={"Chamado Respostas"},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             required={"chamado_id", "mensagem", "autor"},
+     *             @OA\Property(property="chamado_id", type="integer"),
+     *             @OA\Property(property="mensagem", type="string"),
+     *             @OA\Property(property="autor", type="string", enum={"admin", "cliente"})
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Resposta registrada com sucesso"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Erro de validação"
+     *     )
+     * )
+     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -38,6 +74,28 @@ class ChamadoRespostaController extends Controller
         ], 201);
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/chamado-respostas/{id}",
+     *     summary="Exibir resposta específica",
+     *     tags={"Chamado Respostas"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID da resposta",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Resposta encontrada"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Resposta não encontrada"
+     *     )
+     * )
+     */
     public function show($id)
     {
         $resposta = ChamadoResposta::with('chamado')->find($id);
@@ -49,6 +107,39 @@ class ChamadoRespostaController extends Controller
         return response()->json($resposta);
     }
 
+    /**
+     * @OA\Put(
+     *     path="/api/chamado-respostas/{id}",
+     *     summary="Atualizar resposta ao chamado",
+     *     tags={"Chamado Respostas"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID da resposta",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             @OA\Property(property="mensagem", type="string"),
+     *             @OA\Property(property="autor", type="string", enum={"admin", "cliente"})
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Resposta atualizada com sucesso"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Resposta não encontrada"
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Erro de validação"
+     *     )
+     * )
+     */
     public function update(Request $request, $id)
     {
         $resposta = ChamadoResposta::find($id);
@@ -78,6 +169,28 @@ class ChamadoRespostaController extends Controller
         ]);
     }
 
+    /**
+     * @OA\Delete(
+     *     path="/api/chamado-respostas/{id}",
+     *     summary="Remover resposta de chamado",
+     *     tags={"Chamado Respostas"},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         description="ID da resposta",
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Resposta removida com sucesso"
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="Resposta não encontrada"
+     *     )
+     * )
+     */
     public function destroy($id)
     {
         $resposta = ChamadoResposta::find($id);
