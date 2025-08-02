@@ -16,10 +16,13 @@ class ClienteController extends Controller
      *     path="/api/clientes",
      *     summary="Listar todos os clientes",
      *     tags={"Clientes"},
+     *     security={{"sanctum":{}}},
      *     @OA\Response(
      *         response=200,
-     *         description="Lista de clientes retornada com sucesso"
-     *     )
+     *         description="Lista de clientes retornada com sucesso",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function index()
@@ -32,6 +35,7 @@ class ClienteController extends Controller
      *     path="/api/clientes",
      *     summary="Criar novo cliente",
      *     tags={"Clientes"},
+     *     security={{"sanctum":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -51,12 +55,14 @@ class ClienteController extends Controller
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Cliente criado com sucesso"
+     *         description="Cliente criado com sucesso",
+     *         @OA\JsonContent()
      *     ),
      *     @OA\Response(
      *         response=422,
      *         description="Erro de validação"
-     *     )
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function store(Request $request)
@@ -99,6 +105,7 @@ class ClienteController extends Controller
      *     path="/api/clientes/{id}",
      *     summary="Exibir um cliente",
      *     tags={"Clientes"},
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -108,12 +115,14 @@ class ClienteController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Cliente encontrado"
+     *         description="Cliente encontrado",
+     *         @OA\JsonContent()
      *     ),
      *     @OA\Response(
      *         response=404,
      *         description="Cliente não encontrado"
-     *     )
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function show($id)
@@ -132,6 +141,7 @@ class ClienteController extends Controller
      *     path="/api/clientes/{id}",
      *     summary="Atualizar um cliente",
      *     tags={"Clientes"},
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -157,7 +167,8 @@ class ClienteController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Cliente atualizado com sucesso"
+     *         description="Cliente atualizado com sucesso",
+     *         @OA\JsonContent()
      *     ),
      *     @OA\Response(
      *         response=404,
@@ -166,7 +177,8 @@ class ClienteController extends Controller
      *     @OA\Response(
      *         response=422,
      *         description="Erro de validação"
-     *     )
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function update(Request $request, $id)
@@ -220,6 +232,7 @@ class ClienteController extends Controller
      *     path="/api/clientes/{id}",
      *     summary="Remover um cliente",
      *     tags={"Clientes"},
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -229,12 +242,14 @@ class ClienteController extends Controller
      *     ),
      *     @OA\Response(
      *         response=204,
-     *         description="Cliente removido com sucesso"
+     *         description="Cliente removido com sucesso",
+     *         @OA\JsonContent()
      *     ),
      *     @OA\Response(
      *         response=404,
      *         description="Cliente não encontrado"
-     *     )
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function destroy($id)

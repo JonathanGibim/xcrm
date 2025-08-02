@@ -15,10 +15,13 @@ class ChamadoRespostaController extends Controller
      *     path="/api/chamado-respostas",
      *     summary="Listar todas as respostas dos chamados",
      *     tags={"Chamado Respostas"},
+     *     security={{"sanctum":{}}},
      *     @OA\Response(
      *         response=200,
-     *         description="Lista de respostas retornada com sucesso"
-     *     )
+     *         description="Lista de respostas retornada com sucesso",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function index()
@@ -31,6 +34,7 @@ class ChamadoRespostaController extends Controller
      *     path="/api/chamado-respostas",
      *     summary="Registrar nova resposta ao chamado",
      *     tags={"Chamado Respostas"},
+     *     security={{"sanctum":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -42,12 +46,14 @@ class ChamadoRespostaController extends Controller
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Resposta registrada com sucesso"
+     *         description="Resposta registrada com sucesso",
+     *         @OA\JsonContent()
      *     ),
      *     @OA\Response(
      *         response=422,
      *         description="Erro de validação"
-     *     )
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function store(Request $request)
@@ -79,6 +85,7 @@ class ChamadoRespostaController extends Controller
      *     path="/api/chamado-respostas/{id}",
      *     summary="Exibir resposta específica",
      *     tags={"Chamado Respostas"},
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -88,12 +95,14 @@ class ChamadoRespostaController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Resposta encontrada"
+     *         description="Resposta encontrada",
+     *         @OA\JsonContent()
      *     ),
      *     @OA\Response(
      *         response=404,
      *         description="Resposta não encontrada"
-     *     )
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function show($id)
@@ -112,6 +121,7 @@ class ChamadoRespostaController extends Controller
      *     path="/api/chamado-respostas/{id}",
      *     summary="Atualizar resposta ao chamado",
      *     tags={"Chamado Respostas"},
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -128,7 +138,8 @@ class ChamadoRespostaController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Resposta atualizada com sucesso"
+     *         description="Resposta atualizada com sucesso",
+     *         @OA\JsonContent()
      *     ),
      *     @OA\Response(
      *         response=404,
@@ -137,7 +148,8 @@ class ChamadoRespostaController extends Controller
      *     @OA\Response(
      *         response=422,
      *         description="Erro de validação"
-     *     )
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function update(Request $request, $id)
@@ -174,6 +186,7 @@ class ChamadoRespostaController extends Controller
      *     path="/api/chamado-respostas/{id}",
      *     summary="Remover resposta de chamado",
      *     tags={"Chamado Respostas"},
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -183,12 +196,14 @@ class ChamadoRespostaController extends Controller
      *     ),
      *     @OA\Response(
      *         response=204,
-     *         description="Resposta removida com sucesso"
+     *         description="Resposta removida com sucesso",
+     *         @OA\JsonContent()
      *     ),
      *     @OA\Response(
      *         response=404,
      *         description="Resposta não encontrada"
-     *     )
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function destroy($id)

@@ -15,10 +15,13 @@ class ChamadoController extends Controller
      *     path="/api/chamados",
      *     summary="Listar todos os chamados",
      *     tags={"Chamados"},
+     *     security={{"sanctum":{}}},
      *     @OA\Response(
      *         response=200,
-     *         description="Lista de chamados retornada com sucesso"
-     *     )
+     *         description="Lista de chamados retornada com sucesso",
+     *         @OA\JsonContent()
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function index()
@@ -31,6 +34,7 @@ class ChamadoController extends Controller
      *     path="/api/chamados",
      *     summary="Criar novo chamado",
      *     tags={"Chamados"},
+     *     security={{"sanctum":{}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -44,12 +48,14 @@ class ChamadoController extends Controller
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Chamado criado com sucesso"
+     *         description="Chamado criado com sucesso",
+     *         @OA\JsonContent()
      *     ),
      *     @OA\Response(
      *         response=422,
      *         description="Erro de validação"
-     *     )
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function store(Request $request)
@@ -83,6 +89,7 @@ class ChamadoController extends Controller
      *     path="/api/chamados/{id}",
      *     summary="Exibir um chamado",
      *     tags={"Chamados"},
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -92,12 +99,14 @@ class ChamadoController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Chamado encontrado"
+     *         description="Chamado encontrado",
+     *         @OA\JsonContent()
      *     ),
      *     @OA\Response(
      *         response=404,
      *         description="Chamado não encontrado"
-     *     )
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function show($id)
@@ -116,6 +125,7 @@ class ChamadoController extends Controller
      *     path="/api/chamados/{id}",
      *     summary="Atualizar um chamado",
      *     tags={"Chamados"},
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -134,7 +144,8 @@ class ChamadoController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Chamado atualizado com sucesso"
+     *         description="Chamado atualizado com sucesso",
+     *         @OA\JsonContent()
      *     ),
      *     @OA\Response(
      *         response=404,
@@ -143,7 +154,8 @@ class ChamadoController extends Controller
      *     @OA\Response(
      *         response=422,
      *         description="Erro de validação"
-     *     )
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function update(Request $request, $id)
@@ -182,6 +194,7 @@ class ChamadoController extends Controller
      *     path="/api/chamados/{id}",
      *     summary="Remover um chamado",
      *     tags={"Chamados"},
+     *     security={{"sanctum":{}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -191,12 +204,14 @@ class ChamadoController extends Controller
      *     ),
      *     @OA\Response(
      *         response=204,
-     *         description="Chamado removido com sucesso"
+     *         description="Chamado removido com sucesso",
+     *         @OA\JsonContent()
      *     ),
      *     @OA\Response(
      *         response=404,
      *         description="Chamado não encontrado"
-     *     )
+     *     ),
+     *     @OA\Response(response=401, description="Não autenticado")
      * )
      */
     public function destroy($id)

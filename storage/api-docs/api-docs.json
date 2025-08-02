@@ -12,6 +12,131 @@
         }
     ],
     "paths": {
+        "/api/login": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Realiza login e retorna um token",
+                "operationId": "222b2625838e3c57e017987f73598fda",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "user@teste.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "12345678"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login bem-sucedido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "type": "string"
+                                        },
+                                        "user": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciais inválidas"
+                    }
+                }
+            }
+        },
+        "/api/perfil": {
+            "get": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Retorna os dados do usuário autenticado",
+                "operationId": "84bcc9523f79217150343ba8237f767c",
+                "responses": {
+                    "200": {
+                        "description": "Usuário autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "user": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/logout": {
+            "post": {
+                "tags": [
+                    "Autenticação"
+                ],
+                "summary": "Efetua logout (revoga token)",
+                "operationId": "ad65cbbd4e9f201619eae184a5961a98",
+                "responses": {
+                    "200": {
+                        "description": "Logout com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Logout realizado com sucesso."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/chamados": {
             "get": {
                 "tags": [
@@ -21,9 +146,22 @@
                 "operationId": "37d9231c3006a7895b5ae87cc9454abb",
                 "responses": {
                     "200": {
-                        "description": "Lista de chamados retornada com sucesso"
+                        "description": "Lista de chamados retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -77,12 +215,25 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Chamado criado com sucesso"
+                        "description": "Chamado criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "422": {
                         "description": "Erro de validação"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/chamados/{id}": {
@@ -105,12 +256,25 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Chamado encontrado"
+                        "description": "Chamado encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "404": {
                         "description": "Chamado não encontrado"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -165,15 +329,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Chamado atualizado com sucesso"
+                        "description": "Chamado atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "404": {
                         "description": "Chamado não encontrado"
                     },
                     "422": {
                         "description": "Erro de validação"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -194,12 +371,25 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Chamado removido com sucesso"
+                        "description": "Chamado removido com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "404": {
                         "description": "Chamado não encontrado"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/chamado-respostas": {
@@ -211,9 +401,22 @@
                 "operationId": "1acc23f3aebed5082d18d9050e470660",
                 "responses": {
                     "200": {
-                        "description": "Lista de respostas retornada com sucesso"
+                        "description": "Lista de respostas retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -253,12 +456,25 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Resposta registrada com sucesso"
+                        "description": "Resposta registrada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "422": {
                         "description": "Erro de validação"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/chamado-respostas/{id}": {
@@ -281,12 +497,25 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Resposta encontrada"
+                        "description": "Resposta encontrada",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "404": {
                         "description": "Resposta não encontrada"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -329,15 +558,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Resposta atualizada com sucesso"
+                        "description": "Resposta atualizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "404": {
                         "description": "Resposta não encontrada"
                     },
                     "422": {
                         "description": "Erro de validação"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -358,12 +600,25 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Resposta removida com sucesso"
+                        "description": "Resposta removida com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "404": {
                         "description": "Resposta não encontrada"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/clientes": {
@@ -375,9 +630,22 @@
                 "operationId": "f8eafbc2e9500413091c7f84a4470b84",
                 "responses": {
                     "200": {
-                        "description": "Lista de clientes retornada com sucesso"
+                        "description": "Lista de clientes retornada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -446,12 +714,25 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Cliente criado com sucesso"
+                        "description": "Cliente criado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "422": {
                         "description": "Erro de validação"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/clientes/{id}": {
@@ -474,12 +755,25 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Cliente encontrado"
+                        "description": "Cliente encontrado",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "404": {
                         "description": "Cliente não encontrado"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "put": {
                 "tags": [
@@ -547,15 +841,28 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Cliente atualizado com sucesso"
+                        "description": "Cliente atualizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "404": {
                         "description": "Cliente não encontrado"
                     },
                     "422": {
                         "description": "Erro de validação"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "delete": {
                 "tags": [
@@ -576,16 +883,33 @@
                 ],
                 "responses": {
                     "204": {
-                        "description": "Cliente removido com sucesso"
+                        "description": "Cliente removido com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
                     },
                     "404": {
                         "description": "Cliente não encontrado"
+                    },
+                    "401": {
+                        "description": "Não autenticado"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         }
     },
     "tags": [
+        {
+            "name": "Autenticação",
+            "description": "Endpoints de autenticação"
+        },
         {
             "name": "Chamados",
             "description": "Chamados"
@@ -598,5 +922,15 @@
             "name": "Clientes",
             "description": "Clientes"
         }
-    ]
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Use \"Bearer {token}\" no campo de autorização",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
 }
