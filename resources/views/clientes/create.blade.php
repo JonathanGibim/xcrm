@@ -82,7 +82,7 @@
 
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button type="reset" class="btn btn-secondary me-md-2">Limpar</button>
-                    <button type="submit" class="btn btn-primary">Salvar Cliente</button>
+                    <button type="submit" class="btn btn-primary">Cadastrar-se</button>
                 </div>
             </form>
         </div>
