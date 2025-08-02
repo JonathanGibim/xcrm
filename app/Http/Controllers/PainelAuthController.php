@@ -9,6 +9,9 @@ class PainelAuthController extends Controller
 {
     public function showLoginForm()
     {
+        if (Auth::guard('cliente')->check()) {
+            return redirect()->route('painel.dashboard');
+        }
         return view('painel.login');
     }
 

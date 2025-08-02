@@ -43,9 +43,6 @@ Route::prefix('painel')->name('painel.')->group(function () {
     Route::get('login', [PainelAuthController::class, 'showLoginForm'])->name('login');
     Route::post('login', [PainelAuthController::class, 'login'])->name('login.submit');
 
-    // Logout
-    Route::post('logout', [PainelAuthController::class, 'logout'])->name('logout');
-
     // Grupo de rotas protegidas do painel do cliente
     Route::middleware('auth:cliente')->group(function () {
         
@@ -56,6 +53,9 @@ Route::prefix('painel')->name('painel.')->group(function () {
 
         Route::resource('/chamados', PainelChamadoController::class);
         Route::post('/chamados/{chamado}/responder', [PainelChamadoController::class, 'responder'])->name('chamados.responder');
+
+        // Logout
+        Route::post('logout', [PainelAuthController::class, 'logout'])->name('logout');
 
     });
 
@@ -74,9 +74,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('login', [AdminAuthController::class, 'showLoginForm'])->name('login');
     Route::post('login', [AdminAuthController::class, 'login'])->name('login.submit');
 
-    // Logout
-    Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
-
     // Grupo de rotas protegidas do painel administrativo
     Route::middleware('auth')->group(function () {
 
@@ -91,6 +88,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/chamados/{chamado}/fechar', [AdminChamadoController::class, 'fechar'])->name('chamados.fechar');
 
         Route::resource('/clientes', AdminClienteController::class);
+
+        // Logout
+        Route::post('logout', [AdminAuthController::class, 'logout'])->name('logout');
 
     });
 
