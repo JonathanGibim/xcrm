@@ -1,0 +1,49 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ rootNamespace }}Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class {{ class }} extends Controller
+{
+    /**
+     * Exibe uma lista do recurso.
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Armazena um novo recurso.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Exibe o recurso especificado.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Atualiza o recurso especificado.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove o recurso especificado.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
+}
